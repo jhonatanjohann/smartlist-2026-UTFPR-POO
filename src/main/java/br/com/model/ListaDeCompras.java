@@ -21,6 +21,37 @@ public class ListaDeCompras {
         produtos.removeIf(p -> p.getNome().equalsIgnoreCase(nome));
     }
 
+    public void salvarEmArquivoTexto(String nomeArquivo)  {
+        if(!produtos.isEmpty()){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, false))) {
+                for (Produto produto : produtos) {
+                    writer.write(produto.getNome() + " - " + produto.getQuantidade() + " - "+produto.getPreco());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao salvar o arquivo: "+e.getMessage());
+            }
+        }else{
+            System.out.println("Lista vazia!");
+        }
+    }
+
+    public void carregarDeArquivoTexto(String nomeArquivo)  {
+        produtos.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(" - "); //quebra a linha nos traços
+                produtos.add(new Produto(partes[0], Integer.parseInt(partes[1]), Double.parseDouble(partes[2])));
+            }
+            System.out.println("Lista do Arquivo de Texto");
+            System.out.println(this.toString());
+
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o arquivo: "+e.getMessage());
+        }
+    }
+
     @Override
     public String toString() {
         if (produtos.isEmpty()) {
