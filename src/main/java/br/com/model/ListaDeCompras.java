@@ -21,22 +21,22 @@ public class ListaDeCompras {
         produtos.removeIf(p -> p.getNome().equalsIgnoreCase(nome));
     }
 
-    public void salvarEmArquivoTexto(String nomeArquivo)  {
-        if(!produtos.isEmpty()){
+    public void salvarEmArquivoTexto(String nomeArquivo) {
+        if (!produtos.isEmpty()) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, false))) {
                 for (Produto produto : produtos) {
-                    writer.write(produto.getNome() + " - " + produto.getQuantidade() + " - "+produto.getPreco());
+                    writer.write(produto.getNome() + " - " + produto.getQuantidade() + " - " + produto.getPreco());
                     writer.newLine();
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao salvar o arquivo: "+e.getMessage());
+                System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
             }
-        }else{
+        } else {
             System.out.println("Lista vazia!");
         }
     }
 
-    public void carregarDeArquivoTexto(String nomeArquivo)  {
+    public void carregarDeArquivoTexto(String nomeArquivo) {
         produtos.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
@@ -48,9 +48,33 @@ public class ListaDeCompras {
             System.out.println(this.toString());
 
         } catch (IOException e) {
-            System.out.println("Erro ao carregar o arquivo: "+e.getMessage());
+            System.out.println("Erro ao carregar o arquivo: " + e.getMessage());
         }
     }
+
+    public void salvarEmArquivoBinario(String nomeArquivo) {
+        if (!produtos.isEmpty()) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeArquivo))) {
+                oos.writeObject(produtos);
+            } catch (IOException e) {
+                System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Lista vazia!");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    // Suprime avisos de operações não verificadas, esta anotação é usada para silenciar aviso do compilador.
+    public void carregarDeArquivoBinario(String nomeArquivo) {
+        produtos.clear();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomeArquivo))) {
+            produtos = (List<Produto>) ois.readObject();
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+        }
+    }
+
 
     @Override
     public String toString() {
