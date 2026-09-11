@@ -1,9 +1,8 @@
 package br.com.text_01;
 
 import java.io.*;
-import java.nio.Buffer;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         String arquivo1 = "tabua5.txt";
         String arquivo2 = "copiaTabuada5.txt";
