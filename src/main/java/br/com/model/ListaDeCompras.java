@@ -1,4 +1,5 @@
-package br.com.model;
+package model;
+
 import br.com.model.Produto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
