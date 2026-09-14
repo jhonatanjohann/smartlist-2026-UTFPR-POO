@@ -3,12 +3,15 @@ package br.com.model;
 import java.io.Serializable;
 
 public class Produto implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     private String nome;
     private int quantidade;
     private double preco;
 
+    // Construtor padrão (sem argumentos)
+    public Produto() {
+    }
+
+    // Construtor com argumentos
     public Produto(String nome, int quantidade, double preco) {
         this.nome = nome;
         this.quantidade = quantidade;

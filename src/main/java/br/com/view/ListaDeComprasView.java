@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ListaDeComprasView {
+
     private Scanner scanner;
 
     public ListaDeComprasView() {
@@ -18,10 +19,13 @@ public class ListaDeComprasView {
         System.out.println("4. Salvar Lista em Arquivo de Texto");
         System.out.println("5. Carregar Lista de Arquivo de Texto");
         System.out.println("6. Salvar Lista em Arquivo Binário");
-        System.out.println("7.Carregar Lista de Arquivo Binário");
+        System.out.println("7. Carregar Lista de Arquivo Binário");
+        System.out.println("8. Salvar Lista em Arquivo JSON");
+        System.out.println("9. Carregar Lista de Arquivo JSON");
         System.out.println("0. Sair");
         System.out.print("Escolha uma opção: ");
     }
+
 
     public int lerOpcao() {
         int opcao = scanner.nextInt();
@@ -32,13 +36,13 @@ public class ListaDeComprasView {
     public String lerNomeProduto() {
         String nome = "";
         boolean nomeValido = false;
-        while(!nomeValido) {
+        while (!nomeValido) {
             System.out.print("Nome do Produto: ");
             nome = scanner.nextLine().trim();           //remove espaços
 
             if (nome.isEmpty()) {
                 System.out.println("Erro: informe o nome do produto");
-            }else{
+            } else {
                 nomeValido = true;
             }
         }
