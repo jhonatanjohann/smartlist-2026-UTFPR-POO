@@ -1,8 +1,9 @@
-package br.com.controller;
+package controller;
 
-import br.com.model.ListaDeCompras;
-import br.com.view.ListaDeComprasView;
-import br.com.model.Produto;
+
+import view.ListaDeComprasView;
+import model.Produto;
+import model.ListaDeCompras;
 
 public class ListaDeComprasController {
     private ListaDeCompras model;
@@ -21,6 +22,7 @@ public class ListaDeComprasController {
             processarOpcao(opcao);
         } while (opcao != 0);
     }
+
 
     private void processarOpcao(int opcao) {
         switch (opcao) {
@@ -50,6 +52,15 @@ public class ListaDeComprasController {
                 break;
             case 9:
                 carregarDeArquivoJson();
+                break;
+            case 10:
+                filtrarPorQuantidadeMinima();
+                break;
+            case 11:
+                calcularValorTotal();
+                break;
+            case 12:
+                imprimirLista();
                 break;
             case 0:
                 view.exibirMensagem("Saindo...");
@@ -100,4 +111,19 @@ public class ListaDeComprasController {
     private void carregarDeArquivoJson(){
         model.carregarDeArquivoJson("lista_compras.json");
     }
+
+    private void filtrarPorQuantidadeMinima(){
+        int quantidadeMinima = view.lerQuantidadeMinima();
+        System.out.println(model.filtrarPorQuantidadeMinima(quantidadeMinima).toString());
+    }
+
+    private void calcularValorTotal(){
+        System.out.println("Valor Total R$ "+model.calcularValorTotal());
+    }
+
+    private void imprimirLista(){
+        model.imprimirLista();
+        System.out.println("Valor Total R$ "+model.calcularValorTotal());
+    }
+
 }

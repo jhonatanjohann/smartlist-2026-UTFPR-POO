@@ -1,8 +1,6 @@
-package br.com;
-
-import br.com.controller.ListaDeComprasController;
-import br.com.model.ListaDeCompras;
-import br.com.view.ListaDeComprasView;
+import controller.ListaDeComprasController;
+import model.ListaDeCompras;
+import view.ListaDeComprasView;
 
 public class Main {
     public static void main(String[] args) {
